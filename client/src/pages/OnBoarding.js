@@ -77,9 +77,11 @@ const OnBoarding = () => {
                         <div className="multiple-input-container">
                             <input
                                 id="dob_day"
-                                type="number"
+                                type="text"
+                                pattern="\d{0,2}"  // Accepts up to 2 digits
                                 name="dob_day"
                                 placeholder="DD"
+                                maxLength="2"  // Limits input to 2 characters
                                 required={true}
                                 value={formData.dob_day}
                                 onChange={handleChange}
@@ -87,9 +89,11 @@ const OnBoarding = () => {
 
                             <input
                                 id="dob_month"
-                                type="number"
+                                type="text"
+                                pattern="\d{0,2}"  // Accepts up to 2 digits
                                 name="dob_month"
                                 placeholder="MM"
+                                maxLength="2"  // Limits input to 2 characters
                                 required={true}
                                 value={formData.dob_month}
                                 onChange={handleChange}
@@ -97,14 +101,17 @@ const OnBoarding = () => {
 
                             <input
                                 id="dob_year"
-                                type="number"
+                                type="text"
+                                pattern="\d{4}"  // Exactly 4 digits
                                 name="dob_year"
                                 placeholder="YYYY"
+                                maxLength="4"  // Limits input to 4 characters
                                 required={true}
                                 value={formData.dob_year}
                                 onChange={handleChange}
                             />
                         </div>
+
 
                         <label>Gender</label>
                         <div className="multiple-input-container">
