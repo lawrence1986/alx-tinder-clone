@@ -47,7 +47,19 @@ const OnBoarding = () => {
             [name]: value
         }))
     }
-
+    const handlePhotoUpload = (files) => {
+        const file = files[0]; // Assuming only one file is selected
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData(prevState => ({
+                    ...prevState,
+                    url: reader.result // Set the URL of the uploaded image
+                }));
+            };
+            reader.readAsDataURL(file); // Read the file as data URL
+        }
+    };
     return (
         <>
             <Nav
@@ -209,11 +221,24 @@ const OnBoarding = () => {
                             name="url"
                             id="url"
                             onChange={handleChange}
-                            required={true}
+                            required={false}
                         />
                         <div className="photo-container">
                             {formData.url && <img src={formData.url} alt="profile pic preview"/>}
                         </div>
+                        <label htmlFor="photo-upload">Upload Photo</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            id="photo-upload"
+                            name="photo"
+                            onChange={(e) => handlePhotoUpload(e.target.files)}
+                            style={{display: "none"}}
+                        />
+
+                        <button type="button" onClick={() => document.getElementById('photo-upload').click()}>
+                            Select Photo
+                        </button>
 
 
                     </section>
