@@ -15,6 +15,7 @@ const Dashboard = () => {
 
     const getUser = async () => {
         try {
+            if (!userId) return
             const response = await axios.get('http://localhost:8000/user', {
                 params: {userId}
             })
@@ -25,9 +26,11 @@ const Dashboard = () => {
     }
     const getGenderedUsers = async () => {
         try {
+            if (!userId || !user) return
             const response = await axios.get('http://localhost:8000/gendered-users', {
                 params: {gender: user?.gender_interest}
             })
+
             setGenderedUsers(response.data)
         } catch (error) {
             console.log(error)
@@ -47,6 +50,7 @@ const Dashboard = () => {
 
     const updateMatches = async (matchedUserId) => {
         try {
+            if (!userId) return
             await axios.put('http://localhost:8000/addmatch', {
                 userId,
                 matchedUserId
@@ -61,6 +65,10 @@ const Dashboard = () => {
     const swiped = (direction, swipedUserId) => {
         if (direction === 'right') {
             updateMatches(swipedUserId)
+        } else if (direction === 'left') {
+            setGenderedUsers(prevGenderedUsers =>
+                prevGenderedUsers.filter(user => user.user_id !== swipedUserId)
+            )
         }
         setLastDirection(direction)
     }
@@ -93,11 +101,15 @@ const Dashboard = () => {
                                         style={{backgroundImage: "url(" + genderedUser.url + ")"}}
                                         className="card">
                                         <h3>{genderedUser.first_name}</h3>
+                                        <div className="buttons-cont">
+                                            <button onClick={() => swiped('right', genderedUser.user_id)} className="tick-button">✓</button>
+                                            <button onClick={() => swiped('left', genderedUser.user_id)} className="x-button">✗</button>
+                                        </div>
                                     </div>
                                 </TinderCard>
                             )}
                             <div className="swipe-info">
-                                {lastDirection ? <p>You swiped {lastDirection}</p> : <p/>}
+                                {lastDirection ? <p></p> : <p/>}
                             </div>
                         </div>
                     </div>
