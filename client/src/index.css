@@ -312,3 +312,32 @@ nav .logo-container .logo {
     display: flex;
     flex-direction: column;
 }
+
+.buttons-cont {
+    position: absolute;
+    bottom: 10px;
+    width: calc(100% - 20px); /* Adjusted width */
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px; /* Added padding */
+}
+
+.tick-button {
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: green; /* Green color */
+    color: white; /* Text color */
+    cursor: pointer;
+}
+
+.x-button {
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: red; /* Red color */
+    color: white; /* Text color */
+    cursor: pointer;
+}

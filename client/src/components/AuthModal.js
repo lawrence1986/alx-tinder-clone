@@ -40,7 +40,7 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
 
 
         } catch (error) {
-            console.log(error)
+            setError(error.response.data.error)
         }
 
     }
@@ -77,7 +77,7 @@ const AuthModal = ({ setShowModal,  isSignUp }) => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />}
                 <input className="secondary-button" type="submit"/>
-                <p>{error}</p>
+                <p style={{ color: 'red', fontStyle: 'italic' }}>{error}</p>
             </form>
 
             <hr/>
